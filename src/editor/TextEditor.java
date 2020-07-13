@@ -23,7 +23,7 @@ public class TextEditor extends JFrame {
     public TextEditor() {
         //Actual Window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 800);
+        setSize(1920, 1080);
         setVisible(true);
         setTitle("Text Editor");
 
@@ -79,11 +79,14 @@ public class TextEditor extends JFrame {
         menu.add(exit);
 
         //Icons
-        ImageIcon openIcon = new ImageIcon("./resources/openIcon.png");
-        ImageIcon saveIcon = new ImageIcon("./resources/saveIcon.png");
-        ImageIcon searchIcon = new ImageIcon("./resources/searchIcon.png");
-        ImageIcon nextIcon = new ImageIcon("./resources/nextIcon.png");
-        ImageIcon prevIcon = new ImageIcon("./resources/previousIcon.png");
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
+        ImageIcon openIcon = new ImageIcon(getClass().getResource("/openIcon.png"));
+        ImageIcon saveIcon = new ImageIcon(getClass().getResource("/saveIcon.png"));
+        ImageIcon searchIcon = new ImageIcon(getClass().getResource("/searchIcon.png"));
+        ImageIcon nextIcon = new ImageIcon(getClass().getResource("/nextIcon.png"));
+        ImageIcon prevIcon = new ImageIcon(getClass().getResource("/previousIcon.png"));
 
         //Save and Open Buttons
         JButton SaveButton = new JButton(saveIcon);
@@ -344,7 +347,7 @@ public class TextEditor extends JFrame {
 
     private void save(JTextArea textField) {
         jFileChooser.setVisible(true);
-        if (false) {
+        if (lastLoadedFile != null) {
             File saveFile = lastLoadedFile.toFile();
             try (PrintWriter writer = new PrintWriter(saveFile);) {
                 writer.write(textField.getText());
